@@ -1,0 +1,11 @@
+# Carpeta generada por build.js — GitHub Actions la reconstruye en cada
+# despliegue, así que no hace falta (ni conviene) subirla al repositorio.
+dist/
+
+# Node
+node_modules/
+
+# Sistema operativo / editores
+.DS_Store
+Thumbs.db
+.vscode/
