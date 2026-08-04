@@ -1,0 +1,40 @@
+/* ==========================================================================
+   page-404.css — Estilos exclusivos de la página de error 404
+   ========================================================================== */
+
+.not-found {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 130px var(--gutter) 6rem;
+  background:
+    radial-gradient(ellipse 900px 700px at 82% 18%, rgba(201, 162, 75, 0.16), transparent 60%),
+    linear-gradient(165deg, var(--navy-deep) 0%, var(--navy-black) 78%);
+  color: var(--gray-light);
+}
+
+.not-found__inner {
+  position: relative;
+  max-width: 620px;
+  animation: rise 0.9s var(--ease) both;
+}
+
+.not-found h1 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  color: var(--gray-light);
+  margin-bottom: 1.2rem;
+}
+
+.not-found__lede {
+  color: rgba(232, 230, 225, 0.72);
+  max-width: 46ch;
+  margin-bottom: 2.5rem;
+}
+
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+}

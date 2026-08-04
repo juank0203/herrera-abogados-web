@@ -1,0 +1,99 @@
+/* ==========================================================================
+   page-contacto.css — Estilos exclusivos de la página Contacto
+   ========================================================================== */
+
+.contact {
+  background: var(--paper);
+  padding: var(--section-pad) 0;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 7rem);
+  align-items: start;
+}
+
+.contact__info h2 {
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  color: var(--navy);
+  margin-bottom: 1.4rem;
+}
+
+.contact__intro {
+  color: var(--gray-mid-text);
+  max-width: 46ch;
+  margin-bottom: 2.6rem;
+}
+
+.contact__details {
+  display: grid;
+  gap: 1.6rem;
+  margin: 0;
+}
+.contact__details dt {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+.contact__details dd {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.contact__details a { border-bottom: 1px solid transparent; transition: border-color 0.3s var(--ease); }
+.contact__details a:hover { border-color: var(--gold); }
+
+/* Tarjeta de WhatsApp */
+
+.whatsapp-card {
+  position: relative;
+  background: linear-gradient(165deg, var(--navy) 0%, var(--navy-deep) 100%);
+  border: 1px solid rgba(201, 162, 75, 0.3);
+  padding: clamp(2.2rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.whatsapp-card__icon {
+  width: 46px;
+  height: 46px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.3;
+  margin-bottom: 1.2rem;
+}
+
+.whatsapp-card__eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 0.6rem;
+}
+
+.whatsapp-card h3 {
+  font-size: 1.4rem;
+  color: var(--gray-light);
+  margin-bottom: 0.9rem;
+}
+
+.whatsapp-card__copy {
+  color: rgba(232, 230, 225, 0.68);
+  margin-bottom: 1.9rem;
+}
+
+.whatsapp-card__hours {
+  font-size: 0.78rem;
+  color: rgba(232, 230, 225, 0.45);
+  margin-top: 1.1rem;
+}
+
+@media (max-width: 980px) {
+  .contact__grid { grid-template-columns: 1fr; }
+}

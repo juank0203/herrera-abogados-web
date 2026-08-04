@@ -1,0 +1,628 @@
+/* ==========================================================================
+   HERRERA ABOGADOS — base.css
+   Tokens, reset y componentes compartidos por TODAS las páginas
+   (header, footer, botones, whatsapp flotante, page-hero, cta-band,
+   tarjetas de práctica y estadísticas). Los estilos exclusivos de cada
+   página viven en /assets/css/page-<nombre>.css
+   ========================================================================== */
+
+:root {
+  /* Colores de marca (Manual de Identidad de Marca, Herrera Abogados) */
+  --navy: #1B2A4A;
+  --navy-deep: #101B30;
+  --navy-black: #0B131F;
+  --gold: #C9A24B;
+  --gold-light: #E1C588;
+  --gray-light: #E8E6E1;
+  --gray-mid: #6E6C66;
+  --gray-mid-text: #5B5952; /* variante AA-compliant sobre fondos claros */
+  --paper: #FAF8F4;
+  --ink: #17212E;
+
+  /* Tipografía */
+  --font-display: "Cinzel", "Times New Roman", serif;
+  --font-body: "Lato", "Helvetica Neue", Arial, sans-serif;
+
+  /* Ritmo */
+  --gutter: clamp(1.5rem, 5vw, 5rem);
+  --section-pad: clamp(4.5rem, 10vw, 8rem);
+  --max-width: 1280px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   Reset
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+ul, ol { list-style: none; margin: 0; padding: 0; }
+
+button { font-family: inherit; cursor: pointer; }
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ==========================================================================
+   Utilidades tipográficas compartidas
+   ========================================================================== */
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+  color: var(--gold-light);
+}
+
+.eyebrow--dark { color: var(--gold); }
+.eyebrow--gold { color: var(--gold); }
+
+.section-head {
+  max-width: 640px;
+  margin: 0 0 3.5rem;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 3.2vw, 2.75rem);
+  color: var(--navy);
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: 1.6rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 0.2rem;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.text-link:hover { color: var(--gold); }
+
+.text-link--light { color: var(--gray-light); }
+.text-link--light:hover { color: var(--gold-light); }
+
+/* ==========================================================================
+   Botones
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95em 2.1em;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 1px;
+  transition: background-color 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+.btn--gold {
+  background: var(--gold);
+  color: var(--navy-black);
+  border-color: var(--gold);
+}
+.btn--gold:hover { background: var(--gold-light); border-color: var(--gold-light); }
+
+.btn--ghost {
+  background: transparent;
+  color: inherit;
+  border-color: currentColor;
+  opacity: 0.85;
+}
+.btn--ghost:hover { opacity: 1; border-color: var(--gold); color: var(--gold); }
+
+.btn--wide { width: 100%; }
+
+/* ==========================================================================
+   Header / Navegación (compartido en todas las páginas)
+   ========================================================================== */
+
+.nav-toggle-input { display: none; }
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  background: rgba(16, 27, 48, 0.72);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  border-bottom: 1px solid rgba(201, 162, 75, 0.22);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.brand-mark__icon { height: 34px; width: auto; }
+
+.brand-mark__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.brand-mark__herrera {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--gray-light);
+  letter-spacing: 0.03em;
+}
+
+.brand-mark__abogados {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 0.2em;
+}
+
+.main-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.main-nav a {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-light);
+  padding: 0.4em 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.main-nav a:hover,
+.main-nav a.is-active { color: var(--gold-light); border-color: var(--gold-light); }
+
+.main-nav a.nav-cta {
+  color: var(--navy-black);
+  background: var(--gold);
+  padding: 0.7em 1.4em;
+  border: none;
+}
+.main-nav a.nav-cta:hover { background: var(--gold-light); color: var(--navy-black); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 26px;
+  cursor: pointer;
+}
+.nav-toggle span {
+  height: 1px;
+  width: 100%;
+  background: var(--gray-light);
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+.mobile-nav {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease);
+  background: var(--navy-deep);
+  border-top: 1px solid rgba(201, 162, 75, 0.18);
+}
+
+.mobile-nav ul { padding: 1rem var(--gutter) 1.75rem; display: flex; flex-direction: column; gap: 0.4rem; }
+
+.mobile-nav a {
+  display: block;
+  padding: 0.85rem 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-light);
+  border-bottom: 1px solid rgba(201, 162, 75, 0.12);
+}
+
+.mobile-nav a.is-active { color: var(--gold); }
+
+@media (max-width: 980px) {
+  .main-nav { display: none; }
+  .nav-toggle { display: flex; }
+  .mobile-nav { display: block; }
+  .nav-toggle-input:checked ~ .site-header .mobile-nav { max-height: 460px; }
+  .nav-toggle-input:checked ~ .site-header .nav-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle-input:checked ~ .site-header .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav-toggle-input:checked ~ .site-header .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+}
+
+@media (max-width: 640px) {
+  .header-inner { height: 72px; }
+  .brand-mark__herrera { font-size: 1rem; }
+  .brand-mark__abogados { font-size: 0.55rem; }
+}
+
+/* ==========================================================================
+   Page hero (banda superior de páginas internas: Nosotros, Servicios,
+   Casos, Contacto). El home usa su propio hero de página completa,
+   definido en page-inicio.css
+   ========================================================================== */
+
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(150px, 22vw, 210px) var(--gutter) clamp(4rem, 8vw, 6rem);
+  background:
+    radial-gradient(ellipse 900px 700px at 82% 0%, rgba(201, 162, 75, 0.14), transparent 60%),
+    linear-gradient(165deg, var(--navy-deep) 0%, var(--navy-black) 100%);
+  color: var(--gray-light);
+}
+
+.page-hero .section-inner {
+  position: relative;
+  animation: rise 0.9s var(--ease) both;
+}
+
+.page-hero h1 {
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  color: var(--gray-light);
+  margin-bottom: 1.1rem;
+}
+
+.page-hero__lede {
+  max-width: 56ch;
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  color: rgba(232, 230, 225, 0.72);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Motivo gráfico compartido: balanza inscrita en círculo (eco del isotipo).
+   Se usa en las páginas interiores (Nosotros, Servicios, Casos, Contacto,
+   404). En Inicio se reemplazó por la foto de la firma.
+   ========================================================================== */
+
+.svg-motif {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.svg-motif--hero {
+  position: absolute;
+  right: -6%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(58vw, 640px);
+  height: auto;
+  opacity: 0.14;
+}
+
+.svg-motif--band {
+  position: absolute;
+  right: -10%;
+  top: -18%;
+  width: min(46vw, 480px);
+  height: auto;
+  opacity: 0.1;
+}
+
+.svg-motif--watermark {
+  position: absolute;
+  left: -14%;
+  bottom: -20%;
+  width: 46vw;
+  max-width: 620px;
+  height: auto;
+  opacity: 0.06;
+}
+
+/* ==========================================================================
+   Tarjetas de áreas de práctica (compartido: Inicio y Servicios)
+   ========================================================================== */
+
+.practice {
+  background: var(--gray-light);
+  padding: var(--section-pad) 0;
+}
+
+.practice__grid,
+.teaser-practice__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(27, 42, 74, 0.14);
+  border: 1px solid rgba(27, 42, 74, 0.14);
+  margin-bottom: 0;
+}
+
+.practice-card {
+  background: var(--gray-light);
+  padding: 2.6rem 2.2rem;
+  position: relative;
+  transition: background-color 0.35s var(--ease);
+}
+
+.practice-card:hover { background: var(--paper); }
+
+.practice-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
+.practice-card:hover::before { transform: scaleX(1); }
+
+.practice-card__num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.4rem;
+}
+
+.practice-card h3 {
+  font-size: 1.18rem;
+  color: var(--navy);
+  margin-bottom: 0.85rem;
+}
+
+.practice-card p {
+  font-size: 0.94rem;
+  color: var(--gray-mid-text);
+}
+
+/* ==========================================================================
+   Estadísticas (compartido: Inicio y Nosotros)
+   ========================================================================== */
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding-left: 2rem;
+  border-left: 1px solid rgba(201, 162, 75, 0.28);
+}
+
+.stat__num {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat__plus { font-size: 0.55em; }
+
+.stat__label {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Banda de llamado a la acción (compartida: Inicio, Nosotros, Servicios, Casos)
+   ========================================================================== */
+
+.cta-band {
+  background: linear-gradient(165deg, var(--navy) 0%, var(--navy-deep) 100%);
+  padding: clamp(3.5rem, 8vw, 6rem) 0;
+  color: var(--gray-light);
+}
+
+.cta-band__inner {
+  text-align: center;
+  max-width: 640px;
+}
+
+.cta-band h2 {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  margin-bottom: 0.9rem;
+}
+
+.cta-band p {
+  color: rgba(232, 230, 225, 0.7);
+  margin-bottom: 2.2rem;
+}
+
+.cta-band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.1rem;
+}
+
+/* ==========================================================================
+   Footer (compartido en todas las páginas)
+   ========================================================================== */
+
+.site-footer {
+  background: var(--navy-black);
+  border-top: 1px solid rgba(201, 162, 75, 0.22);
+  padding: 3.5rem 0;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer__brand img { height: 30px; width: auto; }
+
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.8rem;
+}
+.footer__nav a {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(232, 230, 225, 0.65);
+  transition: color 0.3s var(--ease);
+}
+.footer__nav a:hover,
+.footer__nav a.is-active { color: var(--gold); }
+
+.footer__legal {
+  width: 100%;
+  font-size: 0.72rem;
+  color: rgba(232, 230, 225, 0.4);
+  border-top: 1px solid rgba(232, 230, 225, 0.1);
+  padding-top: 1.8rem;
+  margin-top: 0.8rem;
+}
+
+@media (max-width: 640px) {
+  .footer__inner { flex-direction: column; align-items: flex-start; }
+}
+
+/* ==========================================================================
+   Botón flotante de WhatsApp (compartido en todas las páginas)
+   ========================================================================== */
+
+.whatsapp-float {
+  position: fixed;
+  right: clamp(1.1rem, 3vw, 2rem);
+  bottom: clamp(1.1rem, 3vw, 2rem);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold);
+  box-shadow: 0 10px 28px rgba(11, 19, 31, 0.38);
+  z-index: 200;
+  transition: transform 0.3s var(--ease), background-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.whatsapp-float:hover {
+  background: var(--gold-light);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(11, 19, 31, 0.45);
+}
+
+.whatsapp-float svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--navy-black);
+  stroke-width: 1.6;
+}
+
+.whatsapp-float::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  animation: whatsapp-pulse 2.6s var(--ease) infinite;
+}
+
+@keyframes whatsapp-pulse {
+  0% { transform: scale(1); opacity: 0.55; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float::before { animation: none; display: none; }
+}
+
+/* ==========================================================================
+   Breakpoints compartidos para grillas de tarjetas/estadísticas
+   ========================================================================== */
+
+@media (max-width: 980px) {
+  .practice__grid,
+  .teaser-practice__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .practice__grid,
+  .teaser-practice__grid { grid-template-columns: 1fr; }
+}

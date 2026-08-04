@@ -1,0 +1,9 @@
+/* ==========================================================================
+   page-servicios.css — Estilos exclusivos de la página Servicios
+   La grilla de tarjetas (.practice, .practice__grid, .practice-card) se
+   define una sola vez en base.css y se reutiliza aquí y en la home.
+   ========================================================================== */
+
+.practice {
+  padding-top: clamp(3.5rem, 7vw, 5.5rem);
+}
